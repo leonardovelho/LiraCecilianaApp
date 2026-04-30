@@ -17,7 +17,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -30,14 +29,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.velholeo.liracecilianaapp.presentation.designsystem.LiraTextStyles
 import liracecilianaapp.composeapp.generated.resources.Res
 import liracecilianaapp.composeapp.generated.resources.lira_ceciliana_logo
 import org.jetbrains.compose.resources.painterResource
@@ -69,9 +66,7 @@ fun LoginScreen(onLogin: () -> Unit) {
 
         Text(
             text = "Lira Ceciliana",
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 38.sp,
-            fontWeight = FontWeight.Medium,
+            style = LiraTextStyles.wordmark,
             textAlign = TextAlign.Center,
         )
 
@@ -79,9 +74,7 @@ fun LoginScreen(onLogin: () -> Unit) {
 
         Text(
             text = "SOCIEDADE MUSICAL · FUNDADA 1858",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 10.sp,
-            letterSpacing = 3.sp,
+            style = LiraTextStyles.metaLabel,
             textAlign = TextAlign.Center,
         )
 
@@ -89,9 +82,7 @@ fun LoginScreen(onLogin: () -> Unit) {
 
         Text(
             text = "Acervo de partituras e arranjos",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 17.sp,
-            fontStyle = FontStyle.Italic,
+            style = LiraTextStyles.tagline,
             textAlign = TextAlign.Center,
         )
 
@@ -120,7 +111,7 @@ fun LoginScreen(onLogin: () -> Unit) {
                 IconButton(onClick = { showPassword = !showPassword }) {
                     Text(
                         text = if (showPassword) "Ocultar" else "Mostrar",
-                        fontSize = 11.sp,
+                        style = LiraTextStyles.buttonInline,
                     )
                 }
             },
@@ -141,16 +132,13 @@ fun LoginScreen(onLogin: () -> Unit) {
                 )
                 Text(
                     text = "Lembrar-me",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    fontSize = 12.sp,
+                    style = LiraTextStyles.caption,
                 )
             }
             TextButton(onClick = { /* TODO: forgot-password flow */ }) {
                 Text(
                     text = "Esqueci a senha",
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 12.sp,
-                    fontStyle = FontStyle.Italic,
+                    style = LiraTextStyles.link,
                 )
             }
         }
@@ -170,9 +158,7 @@ fun LoginScreen(onLogin: () -> Unit) {
         ) {
             Text(
                 text = if (loading) "ENTRANDO…" else "ENTRAR NO ACERVO",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.SemiBold,
-                letterSpacing = 1.5.sp,
+                style = LiraTextStyles.buttonAction,
             )
         }
 
@@ -180,9 +166,7 @@ fun LoginScreen(onLogin: () -> Unit) {
 
         Text(
             text = "Acesso restrito aos membros da instituição.",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 11.sp,
-            fontStyle = FontStyle.Italic,
+            style = LiraTextStyles.footerNote,
             textAlign = TextAlign.Center,
         )
     }
