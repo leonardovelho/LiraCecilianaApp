@@ -7,16 +7,15 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
-import com.velholeo.liracecilianaapp.presentation.login.LoginScreen
-import com.velholeo.liracecilianaapp.presentation.navigation.LoginRoute
-import com.velholeo.liracecilianaapp.presentation.theme.LiraCecilianaTheme
+import com.velholeo.liracecilianaapp.presentation.navigation.AppRoute
+import com.velholeo.liracecilianaapp.presentation.screens.login.LoginScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
 private val navConfig = SavedStateConfiguration {
     serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
-            subclass(LoginRoute::class, LoginRoute.serializer())
+            subclass(AppRoute.LoginRoute::class, AppRoute.LoginRoute.serializer())
         }
     }
 }
@@ -24,13 +23,13 @@ private val navConfig = SavedStateConfiguration {
 @Composable
 @Preview
 fun App() {
-    LiraCecilianaTheme {
-        val backStack = rememberNavBackStack(navConfig, LoginRoute)
+    LiraApplication {
+        val backStack = rememberNavBackStack(navConfig, AppRoute.LoginRoute)
         NavDisplay(
             backStack = backStack,
             onBack = { backStack.removeLastOrNull() },
             entryProvider = entryProvider {
-                entry<LoginRoute> {
+                entry<AppRoute.LoginRoute> {
                     LoginScreen(
                         onLogin = { /* TODO: navigate to home destination */ },
                     )

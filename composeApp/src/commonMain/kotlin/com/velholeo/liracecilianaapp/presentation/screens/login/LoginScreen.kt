@@ -1,5 +1,6 @@
-package com.velholeo.liracecilianaapp.presentation.login
+package com.velholeo.liracecilianaapp.presentation.screens.login
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -37,10 +39,16 @@ import androidx.compose.ui.unit.dp
 import com.velholeo.liracecilianaapp.presentation.designsystem.LiraTextStyles
 import liracecilianaapp.composeapp.generated.resources.Res
 import liracecilianaapp.composeapp.generated.resources.lira_ceciliana_logo
+import liracecilianaapp.composeapp.generated.resources.non_visible
+import liracecilianaapp.composeapp.generated.resources.visible
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun LoginScreen(onLogin: () -> Unit) {
+fun LoginScreen(
+    onLogin: () -> Unit,
+    viewModel: LoginViewModel = koinViewModel(),
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
@@ -109,10 +117,21 @@ fun LoginScreen(onLogin: () -> Unit) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
                 IconButton(onClick = { showPassword = !showPassword }) {
-                    Text(
-                        text = if (showPassword) "Ocultar" else "Mostrar",
-                        style = LiraTextStyles.buttonInline,
-                    )
+                    Crossfade(
+                        targetState = showPassword,
+                    ) { showPass ->
+                        if (showPass) {
+                            Icon(
+                                painterResource(Res.drawable.non_visible),
+                                contentDescription = null,
+                            )
+                        } else {
+                            Icon(
+                                painterResource(Res.drawable.visible),
+                                contentDescription = null,
+                            )
+                        }
+                    }
                 }
             },
             modifier = Modifier.fillMaxWidth(),
