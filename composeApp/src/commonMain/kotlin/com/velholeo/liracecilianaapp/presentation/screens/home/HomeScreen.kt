@@ -1,4 +1,4 @@
-package com.velholeo.liracecilianaapp.presentation.screens.login
+package com.velholeo.liracecilianaapp.presentation.screens.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +9,10 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun HomeScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier.Companion.fillMaxSize(),
+        contentAlignment = Alignment.Companion.Center
+    ) {
         Text("Navegou bonito")
     }
 }

@@ -8,6 +8,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import com.velholeo.liracecilianaapp.presentation.navigation.AppRoute
+import com.velholeo.liracecilianaapp.presentation.screens.home.HomeScreen
 import com.velholeo.liracecilianaapp.presentation.screens.login.LoginScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -16,6 +17,7 @@ private val navConfig = SavedStateConfiguration {
     serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
             subclass(AppRoute.LoginRoute::class, AppRoute.LoginRoute.serializer())
+            subclass(AppRoute.HomeRoute::class, AppRoute.HomeRoute.serializer())
         }
     }
 }
@@ -31,8 +33,14 @@ fun App() {
             entryProvider = entryProvider {
                 entry<AppRoute.LoginRoute> {
                     LoginScreen(
-                        onLogin = { /* TODO: navigate to home destination */ },
+                        onLogin = {
+                            backStack.clear()
+                            backStack.add(AppRoute.HomeRoute)
+                                  },
                     )
+                }
+                entry<AppRoute.HomeRoute> {
+                    HomeScreen()
                 }
             },
         )
